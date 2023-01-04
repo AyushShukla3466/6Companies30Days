@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    int sum(vector<int>& com)
+    {
+        int s = 0;
+        for(auto x:com)
+            s += x;
+        return s;
+    }
+    void comSum(int k,int n,vector<int>& com,int num)
+    {
+        if(k == 0)
+        {
+            if(sum(com) == n)   ans.push_back(com);
+            return;
+        }
+        if(num > 9)   return;
+        com.push_back(num);  //Adding a number in list
+        comSum(k-1,n,com,num+1);
+        com.pop_back();  // Removing number from list
+        comSum(k,n,com,num+1);
+    }
+    vector<vector<int>> combinationSum3(int k, int n) 
+    {
+        vector<int> com;
+        comSum(k,n,com,1);
+        return ans;
+    }
+};
